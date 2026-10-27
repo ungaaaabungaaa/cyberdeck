@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "inputs": {
+    "capacity_wh": 74,
+    "load_w": 13,
+    "efficiency": 0.85,
+    "reserve_fraction": 0.2,
+    "supply_w": 15.3
+  },
+  "full_output_wh": 62.9,
+  "usable_output_wh": 50.32,
+  "full_runtime_hours": 4.838461538461538,
+  "usable_runtime_hours": 3.870769230769231,
+  "supply_headroom_w": 2.3000000000000007,
+  "within_nominal_supply": true,
+  "note": "Constant-load estimate from declared Wh, efficiency, reserve and load. Supply comparison uses a declared nominal rating, not a measured electrical test. No battery state of charge or measured runtime is inferred."
+}

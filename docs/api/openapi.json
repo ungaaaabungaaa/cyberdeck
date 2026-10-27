@@ -1,0 +1,471 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CyberDeck loopback workbench",
+    "version": "1.0.0",
+    "description": "Read-only local API. No authentication, CORS, device control, shell, uploads or writes. Only loopback Host values matching the listening port are accepted. Unknown/repeated query keys fail. Maximum request target 2048 characters. Not a multi-user hosted service."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8794"
+    }
+  ],
+  "security": [],
+  "paths": {
+    "/api/v1/status": {
+      "get": {
+        "operationId": "status",
+        "summary": "Current read-only sensor snapshot or explicitly labeled fixture replay",
+        "description": "No query parameters accepted. Missing live sensors are null with missing/source metadata. Replay time is trace time; it is never labeled as live. HEAD returns the same status/headers without a body.",
+        "responses": {
+          "200": {
+            "description": "Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/budget": {
+      "get": {
+        "operationId": "budget",
+        "summary": "Nominal Wh and supply-rating calculator",
+        "parameters": [
+          {
+            "name": "capacity_wh",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 500,
+              "default": 74
+            }
+          },
+          {
+            "name": "load_w",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 0.5,
+              "maximum": 100,
+              "default": 13
+            }
+          },
+          {
+            "name": "efficiency",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 0.1,
+              "maximum": 1,
+              "default": 0.85
+            }
+          },
+          {
+            "name": "reserve_fraction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.9,
+              "default": 0.2
+            }
+          },
+          {
+            "name": "supply_w",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 15.3
+            }
+          }
+        ],
+        "description": "All values must be finite decimal numbers. Full output Wh = capacity Wh \u00d7 efficiency. Usable Wh = full output Wh \u00d7 (1 \u2212 reserve fraction). Runtime = corresponding output Wh / load W. Nominal supply comparison is load W \u2264 supply W; it is not a measured electrical test. Unknown/repeated/blank values fail. HEAD returns headers without a body.",
+        "responses": {
+          "200": {
+            "description": "Budget",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Budget"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Status": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schema_version",
+          "mode",
+          "collected_at",
+          "trace_elapsed_seconds",
+          "metrics",
+          "sources",
+          "missing",
+          "note"
+        ],
+        "properties": {
+          "schema_version": {
+            "const": 1
+          },
+          "mode": {
+            "enum": ["replay", "live"]
+          },
+          "collected_at": {
+            "type": ["string", "null"],
+            "format": "date-time"
+          },
+          "trace_elapsed_seconds": {
+            "type": ["number", "null"],
+            "minimum": 0
+          },
+          "metrics": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "load_1m",
+              "memory_total_bytes",
+              "memory_available_bytes",
+              "temperature_c",
+              "uptime_seconds",
+              "disk_total_bytes",
+              "disk_free_bytes",
+              "battery_percent"
+            ],
+            "properties": {
+              "load_1m": {
+                "type": ["number", "null"],
+                "minimum": 0,
+                "maximum": 1000000
+              },
+              "memory_total_bytes": {
+                "type": ["number", "null"],
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "memory_available_bytes": {
+                "type": ["number", "null"],
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "temperature_c": {
+                "type": ["number", "null"],
+                "minimum": -30,
+                "maximum": 150
+              },
+              "uptime_seconds": {
+                "type": ["number", "null"],
+                "minimum": 0,
+                "maximum": 1000000000000.0
+              },
+              "disk_total_bytes": {
+                "type": ["number", "null"],
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "disk_free_bytes": {
+                "type": ["number", "null"],
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "battery_percent": {
+                "type": ["number", "null"],
+                "minimum": 0,
+                "maximum": 100
+              }
+            }
+          },
+          "sources": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "load_1m",
+              "memory_total_bytes",
+              "memory_available_bytes",
+              "temperature_c",
+              "uptime_seconds",
+              "disk_total_bytes",
+              "disk_free_bytes",
+              "battery_percent"
+            ],
+            "properties": {
+              "load_1m": {
+                "type": ["string", "null"],
+                "maxLength": 128
+              },
+              "memory_total_bytes": {
+                "type": ["string", "null"],
+                "maxLength": 128
+              },
+              "memory_available_bytes": {
+                "type": ["string", "null"],
+                "maxLength": 128
+              },
+              "temperature_c": {
+                "type": ["string", "null"],
+                "maxLength": 128
+              },
+              "uptime_seconds": {
+                "type": ["string", "null"],
+                "maxLength": 128
+              },
+              "disk_total_bytes": {
+                "type": ["string", "null"],
+                "maxLength": 128
+              },
+              "disk_free_bytes": {
+                "type": ["string", "null"],
+                "maxLength": 128
+              },
+              "battery_percent": {
+                "type": ["string", "null"],
+                "maxLength": 128
+              }
+            }
+          },
+          "missing": {
+            "type": "array",
+            "uniqueItems": true,
+            "maxItems": 8,
+            "items": {
+              "enum": [
+                "load_1m",
+                "memory_total_bytes",
+                "memory_available_bytes",
+                "temperature_c",
+                "uptime_seconds",
+                "disk_total_bytes",
+                "disk_free_bytes",
+                "battery_percent"
+              ]
+            }
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      },
+      "Budget": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schema_version",
+          "inputs",
+          "full_output_wh",
+          "usable_output_wh",
+          "full_runtime_hours",
+          "usable_runtime_hours",
+          "supply_headroom_w",
+          "within_nominal_supply",
+          "note"
+        ],
+        "properties": {
+          "schema_version": {
+            "const": 1
+          },
+          "inputs": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "capacity_wh",
+              "load_w",
+              "efficiency",
+              "reserve_fraction",
+              "supply_w"
+            ],
+            "properties": {
+              "capacity_wh": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 500
+              },
+              "load_w": {
+                "type": "number",
+                "minimum": 0.5,
+                "maximum": 100
+              },
+              "efficiency": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 1
+              },
+              "reserve_fraction": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 0.9
+              },
+              "supply_w": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 100
+              }
+            }
+          },
+          "full_output_wh": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 500
+          },
+          "usable_output_wh": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 500
+          },
+          "full_runtime_hours": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000
+          },
+          "usable_runtime_hours": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000
+          },
+          "supply_headroom_w": {
+            "type": "number",
+            "minimum": -99,
+            "maximum": 99.5
+          },
+          "within_nominal_supply": {
+            "type": "boolean"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "string",
+            "maxLength": 200
+          }
+        }
+      }
+    }
+  }
+}

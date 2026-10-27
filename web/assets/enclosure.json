@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "unit": "mm",
+  "settings": {
+    "width_mm": 240,
+    "height_mm": 160,
+    "depth_mm": 70,
+    "wall_mm": 3,
+    "face_mm": 3,
+    "clearance_mm": 0.5,
+    "screw_inset_mm": 8,
+    "hole_diameter_mm": 3.4
+  },
+  "inner_size_mm": [
+    234,
+    154,
+    64
+  ],
+  "display_outline_mm": [
+    189.5,
+    120,
+    15
+  ],
+  "viewing_window_mm": [
+    156.5,
+    89.0
+  ],
+  "display_margin_mm": [
+    22.25,
+    17.0
+  ],
+  "panel_hole_centres_mm": [
+    [
+      8,
+      8
+    ],
+    [
+      8,
+      152
+    ],
+    [
+      232,
+      8
+    ],
+    [
+      232,
+      152
+    ],
+    [
+      21.75,
+      16.5
+    ],
+    [
+      21.75,
+      143.5
+    ],
+    [
+      218.25,
+      16.5
+    ],
+    [
+      218.25,
+      143.5
+    ]
+  ],
+  "corner_boss_radius_mm": 6,
+  "retainer_outer_mm": [
+    206.5,
+    137.0
+  ],
+  "retainer_inner_mm": [
+    183.5,
+    114
+  ],
+  "frame_post_separation_mm": 3.424038412485382,
+  "assumed_component_stack_mm": 54,
+  "validation": "Analytic dimensional checks only. CAD render, print fit, mount retention, cable bends, materials and thermal performance are unverified."
+}
