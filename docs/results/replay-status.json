@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "mode": "replay",
+  "collected_at": null,
+  "trace_elapsed_seconds": 0,
+  "metrics": {
+    "load_1m": 0.12,
+    "memory_total_bytes": 4294967296,
+    "memory_available_bytes": 3250585600,
+    "temperature_c": 42,
+    "uptime_seconds": 3600,
+    "disk_total_bytes": 34359738368,
+    "disk_free_bytes": 25769803776,
+    "battery_percent": null
+  },
+  "sources": {
+    "load_1m": "synthetic fixture",
+    "memory_total_bytes": "synthetic fixture",
+    "memory_available_bytes": "synthetic fixture",
+    "temperature_c": "synthetic fixture",
+    "uptime_seconds": "synthetic fixture",
+    "disk_total_bytes": "synthetic fixture",
+    "disk_free_bytes": "synthetic fixture",
+    "battery_percent": null
+  },
+  "missing": [
+    "battery_percent"
+  ],
+  "note": "Synthetic fixture replay; no hardware is being measured."
+}

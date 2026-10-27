@@ -1,0 +1,7 @@
+{
+  "capacity_wh": 74,
+  "load_w": 13,
+  "efficiency": 0.85,
+  "reserve_fraction": 0.2,
+  "supply_w": 15.3
+}

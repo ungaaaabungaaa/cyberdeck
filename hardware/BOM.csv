@@ -1,0 +1,14 @@
+item,quantity,proposed_part_or_specification,status,source_or_note
+Computer,1,Raspberry Pi 4 Model B with microSD,not purchased or tested,https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
+Display,1,Official 7-inch Touch Display 2,not purchased or tested,https://www.raspberrypi.com/documentation/accessories/touch-display-2.html
+Display cables,1 set,Manufacturer 15-way DSI and GPIO power cables,verify included parts and orientation,Follow the official display guide with all power disconnected
+Display rear mounts,1 set,Manufacturer supplied M2.5 parts,verify actual included lengths,Pi uses display rear mounts rather than enclosure-specific invented holes
+Power supply,1,Regulated USB-C supply meeting Pi 4 manufacturer requirements,not electrically tested,https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-supply
+Boot media,1,Compatible microSD for Raspberry Pi OS 64-bit desktop,capacity and compatibility to select,Use official Imager and SD guidance
+Keyboard,1,Compact external USB keyboard,fit and load unverified,External removable peripheral rather than an invented keyboard PCB
+Enclosure,3 parts,Shell face and retainer from generated OpenSCAD,unbuilt prototype,Material and print settings require thermal and fit checks
+Corner fasteners,4,M3 x 75 mm bolts with nuts and washers,default 70 mm enclosure only,Verify actual hardware and printed clearances before assembly
+Retainer fasteners,4,M3 x 25 mm bolts with nuts and washers,unbuilt retention concept,Never drill or load the glass; test using a dummy panel first
+Cable strain relief,1,Insulating grommet or clamp for 20 x 12 mm service opening,not selected,Select after actual cable and bend measurements
+Cooling,1,Pi 4 compatible cooling solution with verified clearances,not selected or thermally tested,Do not infer cooling performance from enclosure vents
+Portable power,optional,Complete protected regulated external source,not selected or compatibility tested,No raw-cell pack or charging circuit is designed; 74 Wh is model data only

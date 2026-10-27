@@ -1,0 +1,15 @@
+[Unit]
+Description=CyberDeck read-only local dashboard
+
+[Service]
+Type=simple
+WorkingDirectory=/home/deck/cyberdeck
+ExecStart=/usr/bin/python3 -m cyberdeck serve --live --port 8794
+Environment=PYTHONDONTWRITEBYTECODE=1
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+UMask=0077
+
+[Install]
+WantedBy=default.target

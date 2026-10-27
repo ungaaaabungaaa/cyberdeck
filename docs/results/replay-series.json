@@ -1,0 +1,362 @@
+[
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 0,
+    "metrics": {
+      "load_1m": 0.12,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3250585600,
+      "temperature_c": 42,
+      "uptime_seconds": 3600,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  },
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 5,
+    "metrics": {
+      "load_1m": 0.25,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3229614080,
+      "temperature_c": 43,
+      "uptime_seconds": 3605,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  },
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 10,
+    "metrics": {
+      "load_1m": 0.48,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3208642560,
+      "temperature_c": 44.5,
+      "uptime_seconds": 3610,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  },
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 15,
+    "metrics": {
+      "load_1m": 0.72,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3187671040,
+      "temperature_c": 46,
+      "uptime_seconds": 3615,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  },
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 20,
+    "metrics": {
+      "load_1m": 1.1,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3166699520,
+      "temperature_c": 48,
+      "uptime_seconds": 3620,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  },
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 25,
+    "metrics": {
+      "load_1m": 1.35,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3145728000,
+      "temperature_c": 49.5,
+      "uptime_seconds": 3625,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  },
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 30,
+    "metrics": {
+      "load_1m": 1.2,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3124756480,
+      "temperature_c": 48.5,
+      "uptime_seconds": 3630,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  },
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 35,
+    "metrics": {
+      "load_1m": 0.85,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3103784960,
+      "temperature_c": 47,
+      "uptime_seconds": 3635,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  },
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 40,
+    "metrics": {
+      "load_1m": 0.55,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3082813440,
+      "temperature_c": 45.5,
+      "uptime_seconds": 3640,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  },
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 45,
+    "metrics": {
+      "load_1m": 0.3,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3061841920,
+      "temperature_c": 44,
+      "uptime_seconds": 3645,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  },
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 50,
+    "metrics": {
+      "load_1m": 0.2,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3040870400,
+      "temperature_c": 43,
+      "uptime_seconds": 3650,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  },
+  {
+    "schema_version": 1,
+    "mode": "replay",
+    "collected_at": null,
+    "trace_elapsed_seconds": 55,
+    "metrics": {
+      "load_1m": 0.15,
+      "memory_total_bytes": 4294967296,
+      "memory_available_bytes": 3019898880,
+      "temperature_c": 42.5,
+      "uptime_seconds": 3655,
+      "disk_total_bytes": 34359738368,
+      "disk_free_bytes": 25769803776,
+      "battery_percent": null
+    },
+    "sources": {
+      "load_1m": "synthetic fixture",
+      "memory_total_bytes": "synthetic fixture",
+      "memory_available_bytes": "synthetic fixture",
+      "temperature_c": "synthetic fixture",
+      "uptime_seconds": "synthetic fixture",
+      "disk_total_bytes": "synthetic fixture",
+      "disk_free_bytes": "synthetic fixture",
+      "battery_percent": null
+    },
+    "missing": [
+      "battery_percent"
+    ],
+    "note": "Synthetic fixture replay; no hardware is being measured."
+  }
+]

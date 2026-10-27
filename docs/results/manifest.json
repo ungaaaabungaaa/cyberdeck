@@ -1,0 +1,31 @@
+{
+  "kind": "synthetic-model-and-enclosure-export",
+  "date": "2026-10-27",
+  "source_files_sha256": {
+    "cyberdeck/models.py": "8545eea41b551aa7baa80455b48b5b5ef973c44c3174051a31f0c052a4aa488b",
+    "cyberdeck/metrics.py": "ff21109efae6fe548d76bd5eb61790e4419f0ccb58915101042f0cefedf1cb3c",
+    "cyberdeck/files.py": "8ccd88693d390e4a5b48bc14a5322269498529cf3af5ab10c9a03aa604a37daa",
+    "cyberdeck/cli.py": "4c18441761a98c3b6ae38a0c7d36bf132650e65aea604bec318222b368acb296",
+    "hardware/BOM.csv": "3928cadd2e758db6cc27ce5c7bb26cdda0861377d4432e8a356a7ae4dc9e7533"
+  },
+  "artifacts_sha256": {
+    "docs/results/budget.json": "6d33e74978cde5f78f725a648265b65d6469c47164c57acd5200c301273bf428",
+    "docs/results/replay-series.json": "c745ba84264a8cb85ed5142b4fbdba2af335ec232cf3707c3f6e7354d3c37fb5",
+    "docs/results/replay-status.json": "9f9db4f5c3f86679d554a44065f24b9401e630d8e8b1e08c04e42b24314f81cb",
+    "docs/setup/DEPLOYMENT.md": "ff928167e3290158bbe9b227cc0c0763b6b8788ec7fd84cf0a90ee6c2cb9c9e1",
+    "docs/setup/cyberdeck.service": "9d5f5700753892f2e87d4dae6fd744f949cd5ea44a1ad9bf485bbcb83bb18523",
+    "docs/setup/labwc-autostart.fragment": "467843f7633dd095a39bd6ca9b9b605fa339c0cbb8ddad70e417cbd34a8effe8",
+    "web/assets/bom.csv": "3928cadd2e758db6cc27ce5c7bb26cdda0861377d4432e8a356a7ae4dc9e7533",
+    "web/assets/enclosure.json": "2195005917f3817fc77ed7b1568c90941a43bb0abd351050e1ad3f5dd634b5cd",
+    "web/assets/enclosure.scad": "5dcdf5523a7f8bab2d7f72591f65f5314b43750645f70c526fba7a5cf0cdb7f7",
+    "web/assets/panel.svg": "fa3d4d22064aa2cf0c5da5a90a3ae18aa437b38be8c09fced228b50374eb93c8"
+  },
+  "unverified": [
+    "Raspberry Pi boot and live sensors",
+    "systemd/kiosk installation",
+    "OpenSCAD rendering",
+    "physical fit and retention",
+    "electrical load and runtime",
+    "thermal operation"
+  ]
+}

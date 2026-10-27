@@ -1,0 +1,8 @@
+{
+  "name": "cyberdeck-interface-checks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/view-model.test.mjs"
+  }
+}

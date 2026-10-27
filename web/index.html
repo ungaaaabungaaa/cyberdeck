@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CyberDeck — Field workbench</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#workspace">Skip to workbench</a>
+    <header>
+      <a class="wordmark" href="./"
+        ><span aria-hidden="true">▦</span> CYBERDECK
+        <small>FIELD UNIT / 013</small></a
+      ><span class="connection"><i></i> Local workbench</span>
+    </header>
+    <main id="workspace">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">PORTABLE SYSTEMS / DEVELOPMENT BENCH</p>
+          <h1>Your field desk.<br />Know its limits.</h1>
+          <p class="intro">
+            Read system signals. Plan a power budget.<br />Inspect the enclosure
+            before you build.
+          </p>
+        </div>
+        <aside>
+          <span class="stamp">SOFTWARE + DESIGN<br />HARDWARE UNBUILT</span>
+          <p>
+            This is a software workbench and enclosure prototype. Physical
+            assembly and target-device tests remain pending.
+          </p>
+        </aside>
+      </section>
+      <section class="telemetry">
+        <div class="section-top">
+          <div>
+            <p class="eyebrow">01 / SYSTEM SIGNALS</p>
+            <h2>One view of the local system.</h2>
+          </div>
+          <div class="refresh">
+            <span id="mode" class="mode">Connecting</span
+            ><button id="pause" type="button" aria-pressed="false">
+              Pause updates</button
+            ><button id="refresh" type="button">Refresh once ↻</button>
+          </div>
+        </div>
+        <p id="status" class="status" role="status" aria-live="polite">
+          Requesting the first snapshot…
+        </p>
+        <div class="metric-grid">
+          <article>
+            <span>CPU temperature</span><strong id="temperature">—</strong
+            ><small>OS sensor, when available</small>
+          </article>
+          <article>
+            <span>System load</span><strong id="load">—</strong
+            ><small>1-minute average · not a percentage</small>
+          </article>
+          <article>
+            <span>Memory used</span><strong id="memory">—</strong
+            ><small id="memory-detail">Waiting for source values</small>
+          </article>
+          <article>
+            <span>System uptime</span><strong id="uptime">—</strong
+            ><small id="sample-time">Waiting for source time</small>
+          </article>
+        </div>
+        <div class="signal-grid">
+          <section class="history">
+            <div class="subhead">
+              <h3>Temperature history</h3>
+              <span id="sample-count">0 received samples</span>
+            </div>
+            <div class="chart-wrap">
+              <span id="chart-high" class="axis high">60 °C</span
+              ><span id="chart-low" class="axis low">30 °C</span
+              ><svg
+                id="chart"
+                viewBox="0 0 600 200"
+                preserveAspectRatio="none"
+                role="img"
+                aria-label="Temperature history in received-sample order, not elapsed wall time"
+              ></svg>
+            </div>
+            <p class="hint">
+              Horizontal axis: received-sample order, not elapsed wall time.
+              Missing values leave gaps. Up to 60 samples stay in this page. The
+              synthetic trace repeats every 60 seconds.
+            </p>
+          </section>
+          <aside class="system-notes">
+            <div>
+              <span>Battery sensor</span
+              ><strong id="battery">Not reported</strong
+              ><small
+                >No charge estimate is inferred from the power model.</small
+              >
+            </div>
+            <div>
+              <span>Project filesystem</span><strong id="disk">—</strong
+              ><small>Free space on the filesystem containing this app.</small>
+            </div>
+            <details>
+              <summary>Reading sources &amp; missing values</summary>
+              <p id="provenance-note" class="hint"></p>
+              <dl id="sources"></dl>
+            </details>
+          </aside>
+        </div>
+      </section>
+      <div class="planning-grid">
+        <section class="power section-block">
+          <p class="eyebrow">02 / POWER PLANNING</p>
+          <h2>Energy in. Time out.</h2>
+          <p class="description">
+            A constant-load calculation from declared values. This is not
+            battery telemetry or a measured endurance test.
+          </p>
+          <form id="power-form">
+            <div class="two">
+              <label
+                >Pack capacity <span>Wh</span
+                ><input
+                  id="capacity_wh"
+                  name="capacity_wh"
+                  type="number"
+                  value="74"
+                  min="1"
+                  max="500"
+                  step="any"
+                  required /></label
+              ><label
+                >Assumed load <span>W</span
+                ><input
+                  id="load_w"
+                  name="load_w"
+                  type="number"
+                  value="13"
+                  min="0.5"
+                  max="100"
+                  step="any"
+                  required /></label
+              ><label
+                >Conversion efficiency <span>%</span
+                ><input
+                  id="efficiency"
+                  name="efficiency"
+                  type="number"
+                  value="85"
+                  min="10"
+                  max="100"
+                  step="any"
+                  required /></label
+              ><label
+                >Energy reserve <span>%</span
+                ><input
+                  id="reserve_fraction"
+                  name="reserve_fraction"
+                  type="number"
+                  value="20"
+                  min="0"
+                  max="90"
+                  step="any"
+                  required /></label
+              ><label
+                >Declared supply rating <span>W</span
+                ><input
+                  id="supply_w"
+                  name="supply_w"
+                  type="number"
+                  value="15.3"
+                  min="1"
+                  max="100"
+                  step="any"
+                  required
+              /></label>
+            </div>
+            <button class="primary" type="submit">
+              Calculate budget <span aria-hidden="true">↗</span>
+            </button>
+          </form>
+          <p id="power-status" class="hint" role="status"></p>
+          <div class="budget-results">
+            <div>
+              <span>Usable model runtime</span><strong id="runtime">—</strong
+              ><small id="energy">After efficiency and reserve</small>
+            </div>
+            <div>
+              <span>Full model runtime</span><strong id="full-runtime">—</strong
+              ><small>Before the energy reserve</small>
+            </div>
+          </div>
+          <p id="supply-result" class="supply-result">
+            Enter declared values to compare load with a nominal supply rating.
+          </p>
+          <p class="hint">
+            Peak load, voltage drop, temperature, pack ageing, cable limits, and
+            actual converter behaviour require measurement. The sample 74 Wh
+            value does not describe a tested pack.
+          </p>
+        </section>
+        <section class="design section-block">
+          <p class="eyebrow">03 / ENCLOSURE STUDY</p>
+          <h2>Open the drawing.</h2>
+          <p class="description">
+            Parametric source for a Raspberry Pi 4 and the official 7-inch Touch
+            Display 2. Units are millimetres; measured fit is pending.
+          </p>
+          <figure>
+            <img
+              src="assets/panel.svg"
+              alt="Generated 240 by 160 millimetre front panel with a viewing window, four corner holes and four retainer holes"
+            />
+            <figcaption>
+              Actual generated panel drawing · unbuilt prototype
+            </figcaption>
+          </figure>
+          <dl class="dimensions">
+            <div>
+              <dt>Outer enclosure</dt>
+              <dd>240 × 160 × 70 mm</dd>
+            </div>
+            <div>
+              <dt>Viewing window</dt>
+              <dd>156.5 × 89 mm</dd>
+            </div>
+            <div>
+              <dt>Wall / face</dt>
+              <dd>3 mm / 3 mm</dd>
+            </div>
+            <div>
+              <dt>Clearance holes</dt>
+              <dd>8 × Ø3.4 mm</dd>
+            </div>
+          </dl>
+          <div class="download-row">
+            <a href="assets/enclosure.scad" download>OpenSCAD source ↓</a
+            ><a href="assets/panel.svg" download>Panel SVG ↓</a
+            ><a href="assets/enclosure.json" download>Dimensions JSON ↓</a
+            ><a href="assets/bom.csv" download>Proposed BOM ↓</a>
+          </div>
+          <p class="hint">
+            The Pi uses the display manufacturer's rear mounts. Retention, cable
+            access, material, printing, and cooling still need physical checks.
+            No CAD render or fabrication-ready fit is claimed.
+          </p>
+        </section>
+      </div>
+      <footer>
+        <div>
+          <p class="eyebrow">BUILT IN THE OPEN</p>
+          <p>
+            Replay data is synthetic. Live mode reads supported local OS files
+            without running commands. No analytics, uploads, remote assets,
+            network scanning, or device control.
+          </p>
+        </div>
+        <a
+          href="https://github.com/ungaaaabungaaa/cyberdeck"
+          target="_blank"
+          rel="noreferrer"
+          >Source, setup &amp; assembly checks ↗</a
+        >
+      </footer>
+    </main>
+  </body>
+</html>
