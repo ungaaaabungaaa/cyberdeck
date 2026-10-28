@@ -56,6 +56,19 @@ class MetricTests(unittest.TestCase):
         (self.root / "proc/loadavg").write_text("x" * 1025)
         self.assertIsNone(collect_live(self.root)["metrics"]["load_1m"])
 
+    def test_python_only_numeric_syntax_is_not_treated_as_sensor_data(self):
+        (self.root / "proc/loadavg").write_text("1_0 0 0 1/1 1")
+        (self.root / "proc/uptime").write_text("1_200 0")
+        (self.root / "proc/meminfo").write_text("MemTotal: 1_000 kB\nMemAvailable: 2_50 kB\n")
+        (self.root / "sys/class/thermal/thermal_zone0/temp").write_text("47_500")
+        (self.root / "sys/class/power_supply/BAT0/capacity").write_text("7_2")
+        result = collect_live(self.root, disk_usage=lambda _: (10000, 6000, 4000))
+        for key in ("load_1m", "uptime_seconds", "memory_total_bytes", "memory_available_bytes", "temperature_c", "battery_percent"):
+            self.assertIsNone(result["metrics"][key], key)
+            self.assertIsNone(result["sources"][key], key)
+            self.assertIn(key, result["missing"])
+        self.assertEqual(result["metrics"]["disk_free_bytes"], 4000)
+
     def test_replay_is_explicit_deterministic_and_never_claims_a_collection_time(self):
         a = replay_status(0)
         self.assertEqual(a, replay_status(0))

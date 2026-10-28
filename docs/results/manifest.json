@@ -3,7 +3,7 @@
   "date": "2026-10-27",
   "source_files_sha256": {
     "cyberdeck/models.py": "8545eea41b551aa7baa80455b48b5b5ef973c44c3174051a31f0c052a4aa488b",
-    "cyberdeck/metrics.py": "ff21109efae6fe548d76bd5eb61790e4419f0ccb58915101042f0cefedf1cb3c",
+    "cyberdeck/metrics.py": "3238423149c6f0f722cca73fbec96eda3f6bb23a7f66387d55f4afc5a64eee6a",
     "cyberdeck/files.py": "8ccd88693d390e4a5b48bc14a5322269498529cf3af5ab10c9a03aa604a37daa",
     "cyberdeck/cli.py": "4c18441761a98c3b6ae38a0c7d36bf132650e65aea604bec318222b368acb296",
     "hardware/BOM.csv": "3928cadd2e758db6cc27ce5c7bb26cdda0861377d4432e8a356a7ae4dc9e7533"

@@ -3,6 +3,7 @@
 from datetime import datetime, timezone
 import math
 from pathlib import Path
+import re
 import shutil
 
 RANGES = {
@@ -26,9 +27,15 @@ def _read(root, path, limit=1024):
         return None
 
 
-def _number(value, key):
+def _number(value, key, divisor=1):
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, str) and not re.fullmatch(
+        r"[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?", value.strip()
+    ):
+        return None
     try:
-        number = float(value)
+        number = float(value) / divisor
         low, high = RANGES[key]
         return number if math.isfinite(number) and low <= number <= high else None
     except (TypeError, ValueError, OverflowError):
@@ -59,8 +66,8 @@ def collect_live(root=Path("/"), disk_usage=shutil.disk_usage):
     metrics = dict.fromkeys(RANGES)
     sources = dict.fromkeys(RANGES)
 
-    def put(key, value, source):
-        value = _number(value, key)
+    def put(key, value, source, divisor=1):
+        value = _number(value, key, divisor)
         metrics[key] = value
         sources[key] = source if value is not None else None
 
@@ -92,7 +99,7 @@ def collect_live(root=Path("/"), disk_usage=shutil.disk_usage):
     if kind and any(name in kind.lower() for name in ("cpu", "soc", "bcm")):
         raw = _read(root, sensor + "/temp", 128)
         try:
-            put("temperature_c", float(raw) / 1000, sensor + "/temp ÷ 1000")
+            put("temperature_c", raw, sensor + "/temp ÷ 1000", divisor=1000)
         except (ValueError, TypeError):
             pass
     battery = "/sys/class/power_supply/BAT0"
