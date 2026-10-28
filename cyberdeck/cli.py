@@ -2,6 +2,7 @@
 
 import argparse
 import json
+from pathlib import Path
 import re
 import sys
 from .files import read_config, write_bundle
@@ -57,11 +58,13 @@ def main(argv=None):
         "serve", help="Read-only loopback viewer; fixture replay by default"
     )
     serve.add_argument("--live", action="store_true")
+    serve.add_argument("--disk-path", type=Path)
     serve.add_argument("--port", type=int, default=8794)
     status = commands.add_parser(
         "status", help="Read-only local OS metrics or labeled fixture snapshot"
     )
     status.add_argument("--live", action="store_true")
+    status.add_argument("--disk-path", type=Path)
     power = commands.add_parser(
         "budget", help="Nominal energy/supply model, not battery telemetry"
     )
@@ -78,10 +81,13 @@ def main(argv=None):
     prepare.add_argument("--user", required=True)
     args = parser.parse_args(argv)
     try:
+        if args.command in ("serve", "status") and args.disk_path is not None:
+            if not args.live or not args.disk_path.is_dir():
+                raise ValueError("--disk-path requires --live and an existing directory.")
         if args.command == "serve":
             if not 1 <= args.port <= 65535:
                 raise ValueError("Port must be from 1 to 65535.")
-            server = make_server(args.port, args.live)
+            server = make_server(args.port, args.live, disk_path=args.disk_path)
             print(
                 f"http://127.0.0.1:{args.port}/ — {'live local reads' if args.live else 'synthetic replay'}",
                 flush=True,
@@ -95,7 +101,9 @@ def main(argv=None):
         elif args.command == "status":
             print(
                 json.dumps(
-                    collect_live() if args.live else replay_status(0),
+                    collect_live(disk_path=args.disk_path)
+                    if args.live
+                    else replay_status(0),
                     indent=2,
                     allow_nan=False,
                 )

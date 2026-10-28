@@ -50,6 +50,17 @@ class CliTests(unittest.TestCase):
             )
             self.assertFalse((root / "bad").exists())
 
+    def test_live_disk_path_is_explicit_and_replay_never_reads_it(self):
+        with tempfile.TemporaryDirectory() as directory:
+            code, out, error = self.invoke("status", "--live", "--disk-path", directory)
+            self.assertEqual(code, 0, error)
+            status = json.loads(out)
+            self.assertEqual(status["mode"], "live")
+            self.assertEqual(status["sources"]["disk_total_bytes"], "shutil.disk_usage: configured filesystem")
+            self.assertNotIn(directory, out)
+            self.assertEqual(self.invoke("status", "--disk-path", directory)[0], 2)
+            self.assertEqual(self.invoke("status", "--live", "--disk-path", str(Path(directory)/"missing"))[0], 2)
+
     def test_invalid_config_utf8_depth_size_and_failed_bundle_cleanup(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

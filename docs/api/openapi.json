@@ -3,7 +3,7 @@
   "info": {
     "title": "CyberDeck loopback workbench",
     "version": "1.0.0",
-    "description": "Read-only local API. No authentication, CORS, device control, shell, uploads or writes. Only loopback Host values matching the listening port are accepted. Unknown/repeated query keys fail. Maximum request target 2048 characters. Not a multi-user hosted service."
+    "description": "Read-only local API. No authentication, CORS, device control, shell, uploads or writes. Only loopback Host values matching the listening port are accepted. Unknown/repeated query keys fail. Maximum request target 2048 characters. Not a multi-user hosted service. Live disk telemetry can use a startup-configured filesystem; its path is never exposed or accepted through HTTP queries."
   },
   "servers": [
     {

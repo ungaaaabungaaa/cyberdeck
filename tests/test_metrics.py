@@ -69,6 +69,23 @@ class MetricTests(unittest.TestCase):
             self.assertIn(key, result["missing"])
         self.assertEqual(result["metrics"]["disk_free_bytes"], 4000)
 
+    def test_selected_filesystem_uses_only_disk_metadata_and_redacts_the_path(self):
+        chosen = self.root / "private-mounted-storage"
+        seen = []
+        def disk_usage(path):
+            seen.append(path)
+            return (10000, 6000, 4000)
+        result = collect_live(self.root, disk_usage=disk_usage, disk_path=chosen)
+        self.assertEqual(seen, [chosen])
+        self.assertEqual(result["metrics"]["disk_free_bytes"], 4000)
+        self.assertEqual(result["sources"]["disk_free_bytes"], "shutil.disk_usage: configured filesystem")
+        self.assertNotIn(str(chosen), json.dumps(result))
+        def missing(_path):
+            raise OSError("unmounted")
+        result = collect_live(self.root, disk_usage=missing, disk_path=chosen)
+        self.assertIsNone(result["metrics"]["disk_free_bytes"])
+        self.assertIsNone(result["sources"]["disk_free_bytes"])
+
     def test_replay_is_explicit_deterministic_and_never_claims_a_collection_time(self):
         a = replay_status(0)
         self.assertEqual(a, replay_status(0))

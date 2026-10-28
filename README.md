@@ -22,10 +22,11 @@ To read a supported Linux target instead:
 
 ```sh
 python3 -m cyberdeck status --live
+python3 -m cyberdeck status --live --disk-path /mnt/storage
 python3 -m cyberdeck serve --live
 ```
 
-Live mode reads fixed local `/proc` and `/sys` paths and disk usage. Missing sensors stay **Not reported**; replay values are never substituted. One-minute load is not CPU utilisation. BAT0 is the only supported battery sensor path; a typical Pi with an external power bank will not report a battery percentage. The calculator does not infer remaining charge. Other operating systems can still run replay and may report only disk data in live mode.
+Live mode reads fixed local `/proc` and `/sys` paths and disk usage. By default, disk readings describe the project filesystem. `--disk-path EXISTING_DIR` selects another mounted filesystem for live status or the live server; it reads usage metadata only, never mounts, scans or writes files. The source label says "configured filesystem" without disclosing its path. Replay rejects this option. An unavailable path leaves the disk fields unknown. Missing sensors stay **Not reported**; replay values are never substituted. One-minute load is not CPU utilisation. BAT0 is the only supported battery sensor path; a typical Pi with an external power bank will not report a battery percentage. The calculator does not infer remaining charge. Other operating systems can still run replay and may report only disk data in live mode.
 
 ## CLI and target setup
 
