@@ -61,7 +61,7 @@ def _result(mode, metrics, sources, elapsed=None):
     }
 
 
-def collect_live(root=Path("/"), disk_usage=shutil.disk_usage):
+def collect_live(root=Path("/"), disk_usage=shutil.disk_usage, disk_path=None):
     root = Path(root)
     metrics = dict.fromkeys(RANGES)
     sources = dict.fromkeys(RANGES)
@@ -111,10 +111,12 @@ def collect_live(root=Path("/"), disk_usage=shutil.disk_usage):
             battery + "/capacity",
         )
     try:
-        total, _used, free = disk_usage(Path(__file__).resolve().parent)
+        path = Path(disk_path) if disk_path is not None else Path(__file__).resolve().parent
+        scope = "configured filesystem" if disk_path is not None else "project filesystem"
+        total, _used, free = disk_usage(path)
         if 0 <= free <= total:
-            put("disk_total_bytes", total, "shutil.disk_usage: project filesystem")
-            put("disk_free_bytes", free, "shutil.disk_usage: project filesystem")
+            put("disk_total_bytes", total, "shutil.disk_usage: " + scope)
+            put("disk_free_bytes", free, "shutil.disk_usage: " + scope)
     except (OSError, ValueError, TypeError):
         pass
     return _result("live", metrics, sources)

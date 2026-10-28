@@ -29,7 +29,7 @@ HEADERS = {
 }
 
 
-def make_server(port=8794, live=False, public=None, elapsed=None):
+def make_server(port=8794, live=False, public=None, elapsed=None, disk_path=None):
     public = Path(public or PUBLIC).resolve()
     started = time.monotonic()
     elapsed = elapsed or (lambda: time.monotonic() - started)
@@ -88,7 +88,7 @@ def make_server(port=8794, live=False, public=None, elapsed=None):
                     if url.query:
                         raise ValueError("Status accepts no query parameters.")
                     self.reply(
-                        200, collect_live() if live else replay_status(elapsed())
+                        200, collect_live(disk_path=disk_path) if live else replay_status(elapsed())
                     )
                 elif url.path == "/api/v1/budget":
                     pairs = parse_qsl(

@@ -4,6 +4,8 @@ from pathlib import Path
 import tempfile
 import threading
 import unittest
+from unittest.mock import patch
+from cyberdeck.metrics import collect_live
 from jsonschema import Draft202012Validator, FormatChecker
 from cyberdeck.server import make_server
 
@@ -58,6 +60,29 @@ class ServerTests(unittest.TestCase):
         )
         self.assertEqual(code, 200)
         self.assertEqual(json.loads(data)["usable_runtime_hours"], 6)
+
+    def test_live_status_uses_startup_filesystem_selection(self):
+        sample = collect_live(root=self.root, disk_usage=lambda _: (1000, 600, 400), disk_path=self.root)
+        server = make_server(port=0, live=True, disk_path=self.root)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            with patch("cyberdeck.server.collect_live", return_value=sample) as reader:
+                client = HTTPConnection("127.0.0.1", server.server_port, timeout=3)
+                try:
+                    client.request("GET", "/api/v1/status")
+                    response = client.getresponse()
+                    self.assertEqual(response.status, 200)
+                    result = json.loads(response.read())
+                    self.validate("Status", result)
+                    self.assertEqual(result["metrics"]["disk_free_bytes"], 400)
+                    reader.assert_called_once_with(disk_path=self.root)
+                finally:
+                    client.close()
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=2)
 
     def test_bad_queries_host_methods_private_paths_and_head(self):
         for path in [
